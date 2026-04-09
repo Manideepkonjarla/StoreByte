@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO META TAGS — helps Google find & rank StoreByte ═══ -->
+  <title>StoreByte — Storage Commands, Docs & Knowledge Base</title>
+  <meta name="description" content="StoreByte is your ultimate knowledge base for storage commands, Linux disk management, LVM, RAID, cloud storage, NFS/SAN, and filesystem documentation. Search, save, and share storage expertise." />
+  <meta name="keywords" content="storage commands, linux storage, LVM commands, disk management, RAID configuration, NFS SAN, cloud storage, fdisk, lsblk, iostat, storage knowledge base, StoreByte" />
+  <meta name="author" content="StoreByte" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.storebyte.dev/" />
+
+  <!-- ═══ OPEN GRAPH (WhatsApp, LinkedIn, Facebook previews) ═══ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.storebyte.dev/" />
+  <meta property="og:title" content="StoreByte — Storage Commands & Knowledge Base" />
+  <meta property="og:description" content="The ultimate storage commands knowledge base. Disk management, LVM, RAID, cloud storage, NFS/SAN — all in one place." />
+  <meta property="og:image" content="https://www.storebyte.dev/images/og-image.png" />
+  <meta property="og:site_name" content="StoreByte" />
+
+  <!-- ═══ TWITTER CARD ═══ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="StoreByte — Storage Commands & Knowledge Base" />
+  <meta name="twitter:description" content="The ultimate storage commands knowledge base for sysadmins and DevOps engineers." />
+  <meta name="twitter:image" content="https://www.storebyte.dev/images/og-image.png" />
+
+  <!-- ═══ STRUCTURED DATA (Google Rich Results) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "StoreByte",
+    "url": "https://www.storebyte.dev",
+    "description": "Storage commands, documentation, and knowledge base for sysadmins and DevOps engineers.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.storebyte.dev/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ═══ FONTS ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════════════ -->
+  <nav class="navbar">
+    <a href="/" class="nav-logo">
+      <span class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/>
+          <path d="M3 5v4c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+          <path d="M3 9v4c0 1.66 4.03 3 9 3s9-1.34 9-3V9"/>
+          <path d="M3 13v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </span>
+      <span class="logo-text">StoreByte</span>
+    </a>
+    <div class="nav-links">
+      <a href="#commands">Commands</a>
+      <a href="#docs">Docs</a>
+      <a href="#about">About</a>
+      <a href="#" class="nav-cta" onclick="openAddModal()">+ Add Entry</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════ -->
+  <header class="hero" id="home">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">v1.0 · storage knowledge base</div>
+      <h1 class="hero-title">
+        Every storage command,<br/>
+        <em>one byte at a time.</em>
+      </h1>
+      <p class="hero-sub">StoreByte is the open knowledge base for sysadmins and DevOps engineers. Search, save, and share storage commands, LVM recipes, cloud storage docs, and more.</p>
+      <div class="hero-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="hero-search" placeholder="search df, lvm, s3, raid..." oninput="syncSearch(this.value)" />
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" id="stat-count">18</span><span class="stat-label">commands</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">7</span><span class="stat-label">categories</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">∞</span><span class="stat-label">searchable</span></div>
+      </div>
+    </div>
+    <div class="hero-terminal">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">storebyte ~ bash</span></div>
+      <div class="term-body">
+        <div class="term-line"><span class="term-prompt">$</span> df -h</div>
+        <div class="term-out">Filesystem      Size  Used Avail Use%</div>
+        <div class="term-out">/dev/sda1        50G   12G   38G  24% /</div>
+        <div class="term-out">/dev/sdb1       200G   80G  120G  40% /data</div>
+        <div class="term-line"><span class="term-prompt">$</span> lsblk -o NAME,SIZE,TYPE<span class="cursor">█</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       CATEGORY TABS + COMMAND GRID
+  ════════════════════════════════════════════ -->
+  <section class="commands-section" id="commands">
+    <div class="container">
+      <div class="section-header">
+        <h2>Command Library</h2>
+        <p>Browse by category or search above. Click <strong>copy</strong> to grab any command instantly.</p>
+      </div>
+
+      <div class="tab-row" id="tab-row">
+        <button class="tab active" data-cat="all" onclick="setTab(this)">all</button>
+        <button class="tab" data-cat="disk" onclick="setTab(this)">disk</button>
+        <button class="tab" data-cat="lvm" onclick="setTab(this)">lvm</button>
+        <button class="tab" data-cat="filesystem" onclick="setTab(this)">filesystem</button>
+        <button class="tab" data-cat="raid" onclick="setTab(this)">raid</button>
+        <button class="tab" data-cat="cloud" onclick="setTab(this)">cloud</button>
+        <button class="tab" data-cat="nfs" onclick="setTab(this)">nfs/san</button>
+        <button class="tab" data-cat="monitoring" onclick="setTab(this)">monitoring</button>
+      </div>
+
+      <div class="results-bar">
+        <span id="results-count" class="results-count">18 entries</span>
+        <button class="add-btn" onclick="openAddModal()">+ Add Entry</button>
+      </div>
+
+      <div class="cmd-grid" id="cmd-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       DOCS SECTION
+  ════════════════════════════════════════════ -->
+  <section class="docs-section" id="docs">
+    <div class="container">
+      <div class="section-header">
+        <h2>Knowledge Documents</h2>
+        <p>Deeper guides and reference documents for storage concepts.</p>
+      </div>
+      <div class="docs-grid">
+        <article class="doc-card">
+          <div class="doc-icon">📖</div>
+          <h3>LVM Complete Guide</h3>
+          <p>Physical volumes, volume groups, logical volumes — the full lifecycle with examples.</p>
+          <div class="doc-meta"><span class="doc-tag">lvm</span><span class="doc-tag">linux</span></div>
+        </article>
+        <article class="doc-card">
+          <div class="doc-icon">🖥️</div>
+          <h3>RAID Levels Explained</h3>
+          <p>RAID 0, 1, 5, 6, 10 — performance vs redundancy trade-offs with real-world use cases.</p>
+          <div class="doc-meta"><span class="doc-tag">raid</span><span class="doc-tag">hardware</span></div>
+        </article>
+        <article class="doc-card">
+          <div class="doc-icon">☁️</div>
+          <h3>Cloud Storage Cheatsheet</h3>
+          <p>AWS S3, EBS, EFS, Azure Blob, GCS — commands, policies, and cost optimization tips.</p>
+          <div class="doc-meta"><span class="doc-tag">cloud</span><span class="doc-tag">aws</span></div>
+        </article>
+        <article class="doc-card">
+          <div class="doc-icon">🔗</div>
+          <h3>NFS & SAN Setup</h3>
+          <p>Configuring NFS exports, mounting shares, iSCSI targets, and multipath I/O.</p>
+          <div class="doc-meta"><span class="doc-tag">nfs</span><span class="doc-tag">san</span></div>
+        </article>
+        <article class="doc-card">
+          <div class="doc-icon">📊</div>
+          <h3>Disk Monitoring Toolkit</h3>
+          <p>iostat, smartctl, iotop, dstat — monitoring disk health and performance in production.</p>
+          <div class="doc-meta"><span class="doc-tag">monitoring</span><span class="doc-tag">ops</span></div>
+        </article>
+        <article class="doc-card doc-card--add" onclick="openAddModal()">
+          <div class="doc-icon">+</div>
+          <h3>Contribute a Document</h3>
+          <p>Add your own knowledge document or runbook to help the community.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       ABOUT SECTION
+  ════════════════════════════════════════════ -->
+  <section class="about-section" id="about">
+    <div class="container about-inner">
+      <div class="about-text">
+        <h2>About StoreByte</h2>
+        <p>StoreByte is a community-driven knowledge base built by and for storage engineers, sysadmins, and DevOps practitioners. Our mission: make storage knowledge instantly searchable and accessible.</p>
+        <p>Whether you're partitioning a disk, building an LVM stack, debugging cloud storage costs, or setting up NFS — StoreByte has the command and context you need, fast.</p>
+        <div class="about-tags">
+          <span>Linux Storage</span><span>LVM</span><span>RAID</span>
+          <span>Cloud Storage</span><span>NFS/SAN</span><span>Monitoring</span>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-stat-grid">
+          <div class="a-stat"><div class="a-num" id="a-count">18</div><div class="a-label">commands</div></div>
+          <div class="a-stat"><div class="a-num">7</div><div class="a-label">categories</div></div>
+          <div class="a-stat"><div class="a-num">5</div><div class="a-label">doc guides</div></div>
+          <div class="a-stat"><div class="a-num">1</div><div class="a-label">community</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <span class="logo-icon sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M3 5v4c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+            <path d="M3 9v4c0 1.66 4.03 3 9 3s9-1.34 9-3V9"/>
+            <path d="M3 13v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          </svg>
+        </span>
+        <span>StoreByte</span>
+      </div>
+      <p class="footer-copy">© 2025 StoreByte · Storage Commands & Knowledge Base · Open for contributions</p>
+      <div class="footer-links">
+        <a href="#commands">Commands</a>
+        <a href="#docs">Docs</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+       ADD ENTRY MODAL
+  ════════════════════════════════════════════ -->
+  <div class="modal-bg" id="modal-bg" onclick="maybeClose(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Entry</h3>
+        <button class="modal-close" onclick="closeAddModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>Command / Title *</label>
+        <input type="text" id="m-name" placeholder="e.g. df -h" />
+        <label>Description *</label>
+        <textarea id="m-desc" placeholder="What does this command do?"></textarea>
+        <label>Example</label>
+        <input type="text" id="m-cmd" placeholder="e.g. df -h /dev/sda1" class="mono-input" />
+        <div class="modal-row">
+          <div>
+            <label>Category</label>
+            <select id="m-cat">
+              <option value="disk">disk</option>
+              <option value="lvm">lvm</option>
+              <option value="filesystem">filesystem</option>
+              <option value="raid">raid</option>
+              <option value="cloud">cloud</option>
+              <option value="nfs">nfs/san</option>
+              <option value="monitoring">monitoring</option>
+            </select>
+          </div>
+          <div>
+            <label>Platform</label>
+            <select id="m-plat">
+              <option value="linux">linux</option>
+              <option value="windows">windows</option>
+              <option value="cloud">cloud</option>
+              <option value="both">cross-platform</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeAddModal()">Cancel</button>
+        <button class="btn-save" onclick="saveEntry()">Save Entry</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
